@@ -408,7 +408,7 @@ namespace Pico8Emulator.Unit.Cart {
 		}
 
 		public void Export(string filename) {
-			var sheet = (Image) Activator.CreateInstance(Emulator.ImageBackend, filename);
+			var sheet = (Image) Activator.CreateInstance(Emulator.ImageBackend, 128, 128);
 
 			for (var i = 0; i < sheet.Height; i += 1) {
 				for (var j = 0; j < sheet.Width; j += 1) {
