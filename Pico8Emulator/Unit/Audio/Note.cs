@@ -63,7 +63,7 @@ namespace Pico8Emulator.Unit.Audio {
 
 					if (_vibrato) {
 						freq = Util.Lerp(Util.NoteToFrequency(pitch), Util.NoteToFrequency(pitch + 0.5f),
-							(float)Math.Sin(_timePassed * 2 * Math.PI * 8));
+							(float)System.Math.Sin(_timePassed * 2 * System.Math.PI * 8));
 					}
 					else {
 						freq = Util.Lerp(Util.NoteToFrequency(_pitchFrom), Util.NoteToFrequency(pitch), _timePassed / _duration);

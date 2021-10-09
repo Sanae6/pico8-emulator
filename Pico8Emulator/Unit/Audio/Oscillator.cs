@@ -45,7 +45,7 @@ namespace Pico8Emulator.Unit.Audio {
 		/// <returns>The sample value<see cref="float"/></returns>
 		public float Sine(float frequency) {
 			_time += frequency / sampleRate;
-			return (float)Math.Sin(_time * 2 * Math.PI);
+			return (float)System.Math.Sin(_time * 2 * System.Math.PI);
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace Pico8Emulator.Unit.Audio {
 		/// <returns>The sample value<see cref="float"/></returns>
 		public float Sawtooth(float frequency) {
 			_time += frequency / sampleRate;
-			return (float)(2 * (_time - Math.Floor(_time + 0.5)));
+			return (float)(2 * (_time - System.Math.Floor(_time + 0.5)));
 		}
 
 		/// <summary>
@@ -95,7 +95,7 @@ namespace Pico8Emulator.Unit.Audio {
 		/// <returns>The sample value<see cref="float"/></returns>
 		public float Triangle(float frequency) {
 			_time += frequency / sampleRate;
-			return (Math.Abs(((_time) % 1) * 2 - 1) * 2.0f - 1.0f) * 0.7f;
+			return (System.Math.Abs(((_time) % 1) * 2 - 1) * 2.0f - 1.0f) * 0.7f;
 		}
 
 		/// <summary>
@@ -106,7 +106,7 @@ namespace Pico8Emulator.Unit.Audio {
 		public float Organ(float frequency) {
 			_time += frequency / sampleRate;
 			var x = _time * 4;
-			return (float)((Math.Abs((x % 2) - 1) - 0.5f + (Math.Abs(((x * 0.5) % 2) - 1) - 0.5f) / 2.0f - 0.1f) * 0.7f);
+			return (float)((System.Math.Abs((x % 2) - 1) - 0.5f + (System.Math.Abs(((x * 0.5) % 2) - 1) - 0.5f) / 2.0f - 0.1f) * 0.7f);
 		}
 
 		/// <summary>
@@ -117,7 +117,7 @@ namespace Pico8Emulator.Unit.Audio {
 		public float Phaser(float frequency) {
 			_time += frequency / sampleRate;
 			var x = _time * 2;
-			return (Math.Abs((x % 2) - 1) - 0.5f + (Math.Abs(((x * 127 / 128) % 2) - 1) - 0.5f) / 2) - 1.0f / 4.0f;
+			return (System.Math.Abs((x % 2) - 1) - 0.5f + (System.Math.Abs(((x * 127 / 128) % 2) - 1) - 0.5f) / 2) - 1.0f / 4.0f;
 		}
 
 		private float _lastx = 0;
@@ -136,7 +136,7 @@ namespace Pico8Emulator.Unit.Audio {
 			float lsample = _sample;
 			_sample = (lsample + scale * ((float)_random.NextDouble() * 2 - 1)) / (1.0f + scale);
 			_lastx = _time;
-			return Math.Min(Math.Max((lsample + _sample) * 4.0f / 3.0f * (1.75f - scale), -1), 1) * 0.7f;
+			return System.Math.Min(System.Math.Max((lsample + _sample) * 4.0f / 3.0f * (1.75f - scale), -1), 1) * 0.7f;
 		}
 	}
 }

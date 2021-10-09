@@ -127,7 +127,7 @@ namespace Pico8Emulator.Unit.Audio {
 
 		public void CompressBuffer() {
 			for (int i = 0; i < BufferSize; i++) {
-				audioBuffer[i] = (float)Math.Tanh(audioBuffer[i]);
+				audioBuffer[i] = (float)System.Math.Tanh(audioBuffer[i]);
 			}
 		}
 
