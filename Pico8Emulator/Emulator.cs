@@ -1,20 +1,20 @@
-﻿using Pico8Emulator.backend;
+﻿using Pico8Emulator.Backend;
 using Pico8Emulator.lua;
-using Pico8Emulator.unit;
-using Pico8Emulator.unit.audio;
-using Pico8Emulator.unit.cart;
-using Pico8Emulator.unit.input;
-using Pico8Emulator.unit.math;
-using Pico8Emulator.unit.mem;
+using Pico8Emulator.Unit;
+using Pico8Emulator.Unit.Audio;
+using Pico8Emulator.Unit.Cart;
+using Pico8Emulator.Unit.Input;
+using Pico8Emulator.Unit.Math;
+using Pico8Emulator.Unit.Mem;
 using System;
 using System.Threading;
 using System.Collections.Generic;
-using GraphicsUnit = Pico8Emulator.unit.graphics.GraphicsUnit;
+using GraphicsUnit = Pico8Emulator.Unit.Graphics.GraphicsUnit;
 using System.Diagnostics;
 
 namespace Pico8Emulator {
 	public class Emulator {
-		public readonly List<Unit> units = new List<Unit>();
+		public readonly List<Unit.Unit> units = new List<Unit.Unit>();
 
 		public MemoryUnit Memory;
 		public GraphicsUnit Graphics;
@@ -26,6 +26,7 @@ namespace Pico8Emulator {
 		public readonly GraphicsBackend GraphicsBackend;
 		public readonly AudioBackend AudioBackend;
 		public readonly InputBackend InputBackend;
+		public readonly Type ImageBackend;
 
 		public Thread gameThread;
 		public Stopwatch cartLoopTimer = new Stopwatch();
