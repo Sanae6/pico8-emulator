@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace Pico8Emulator {
 	public class Emulator {
-		public readonly List<Unit.Unit> units = new List<Unit.Unit>();
+		public readonly List<Unit.Unit> units = new();
 
 		public MemoryUnit Memory;
 		public GraphicsUnit Graphics;
@@ -37,10 +37,11 @@ namespace Pico8Emulator {
 
 		private bool exitGame = false;
 
-		public Emulator(GraphicsBackend graphics, AudioBackend audio, InputBackend input) {
+		public Emulator(GraphicsBackend graphics, AudioBackend audio, InputBackend input, Type imageType) {
 			GraphicsBackend = graphics;
 			AudioBackend = audio;
 			InputBackend = input;
+			ImageBackend = imageType;
 
 			graphics.Emulator = this;
 			audio.Emulator = this;
@@ -82,10 +83,10 @@ namespace Pico8Emulator {
 
 			gameThread = new Thread(() => {
 				CartridgeLoader.Run();
-			});
-
-			gameThread.IsBackground = false;
-			gameThread.Priority = ThreadPriority.Highest;
+			}) {
+				IsBackground = false,
+				Priority = ThreadPriority.Highest
+			};
 
 			gameThread.Start();
 		}
@@ -94,16 +95,16 @@ namespace Pico8Emulator {
 		{
 			exitGame = false;
 
-			Action Update;
+			Action update;
 			if (CartridgeLoader.HighFps)
 			{
 				UpdateTime = 1f / 60f * 1000;
-				Update = Update60;
+				update = Update60;
 			}
 			else
 			{
 				UpdateTime = 1f / 30f * 1000;
-				Update = Update30;
+				update = Update30;
 			}
 
 			cartLoopTimer.Restart();
@@ -116,7 +117,7 @@ namespace Pico8Emulator {
 
 				GameLoopCalls++;
 
-				Update();
+				update();
 				Draw();
 
 				//
